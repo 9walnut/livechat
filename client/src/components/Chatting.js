@@ -108,7 +108,7 @@ export default function Chatting2() {
             <div className="container">
               <div className="row">
                 <div className="user-log col-sm-4">
-                  <h3 style={{ textAlign: "center" }}>Users</h3>
+                  <h3 style={{ textAlign: "center", color: "white" }}>Users</h3>
                   <ul>
                     {Object.keys(userList).map((user, index) => (
                       <div className="active" key={index}>
