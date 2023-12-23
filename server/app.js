@@ -31,7 +31,7 @@ io.on("connection", (socket) => {
       rooms[res.userId] = res.roomId;
       socket.join(res.roomId);
       io.emit("notice", {
-        msg: `${res.userId}님이 ${res.roomId}방에 입장하셨습니다.`,
+        msg: `${res.userId}님이 입장하셨습니다.`,
       });
       socket.emit("entrySuccess", { userId: res.userId });
       userIdArr[socket.id] = res.userId;

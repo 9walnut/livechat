@@ -96,68 +96,116 @@ export default function Chatting2() {
     <>
       {userId ? (
         <>
+          {" "}
           <header className="page-header">
             <div className="container">
-              <h2>{userId}님 환영합니다.</h2>
+              <h2>
+                Hi {userId}! Welcom to room {roomIdInput}
+              </h2>
             </div>
           </header>
           <div className="main">
             <div className="container">
-              <div className="row justify-content-center">
-                <div className="col-auto">
-                  <div className="chat-log">
-                    {chatList.map((chat, i) => {
-                      if (chat.type === "notice")
-                        return <Notice key={i} chat={chat} />;
-                      else return <Chat key={i} chat={chat} />;
-                    })}
+              <div className="row">
+                <div className="user-log col-sm-4">
+                  <h3 style={{ textAlign: "center" }}>Users</h3>
+                  <ul>
+                    {Object.keys(userList).map((user, index) => (
+                      <div className="active" key={index}>
+                        <div
+                          className="d-flex bd-highlight"
+                          style={{
+                            border: "1px solid grey",
+                            borderRadius: "5px",
+                            margin: "2px",
+                            height: "90px",
+                            background: "white",
+                          }}
+                        >
+                          <div className="img_cont">
+                            <img
+                              src="img/user.png"
+                              className="rounded-circle user_img"
+                              alt="userIcon"
+                              style={{
+                                width: "40px",
+                                height: "40px",
+                                margin: "20px 10px 10px 15px",
+                                verticalAlign: "middle",
+                              }}
+                            />
+                            <span className="online_icon"></span>
+                          </div>
+                          <div className="user_info">
+                            <span>{userList[user]}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </ul>
+                  {/* <h3>채팅방 목록</h3>
+                  <ul>
+                    {Object.keys(roomIdInput).map((room, index) => (
+                      <li key={index}>{roomIdInput[room]}</li>
+                    ))}
+                  </ul> */}
+                </div>
+                <div className="col-sm-8">
+                  <div className="col-auto">
+                    <div className="chat-log">
+                      {chatList.map((chat, i) => {
+                        if (chat.type === "notice")
+                          return <Notice key={i} chat={chat} />;
+                        else return <Chat key={i} chat={chat} />;
+                      })}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="chat-form">
-              <div className="container">
-                <form>
-                  <div className="row align-items-center">
-                    <div className="col-sm-1 col-xs-1 mr-2">
-                      <select
-                        className="custom-select"
-                        value={dmTo}
-                        onChange={(e) => setDmTo(e.target.value)}
-                      >
-                        <option value="all">전체</option>
-                        {userListOptions}
-                      </select>
-                    </div>
-                    <div className="col-sm-8 col-xs-4 mr-2">
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={msgInput}
-                        onChange={(e) => setMsgInput(e.target.value)}
-                      />
-                    </div>
-                    <div className="col-sm-1 col-xs-1">
-                      <button
-                        type="button"
-                        className="btn btn-primary btn-block"
-                        onClick={sendMsg}
-                      >
-                        전송
-                      </button>
-                    </div>
-                    <div className="col-sm-1 col-xs-1">
-                      <button
-                        type="button"
-                        className="btn btn-dark btn-block"
-                        onClick={disconnect}
-                      >
-                        퇴장
-                      </button>
-                    </div>
+          </div>
+          <div className="chat-form">
+            <div className="container">
+              <form>
+                <div className="row align-items-center">
+                  <div className="col-sm-1 col-xs-1 mr-2">
+                    <select
+                      className="custom-select"
+                      value={dmTo}
+                      onChange={(e) => setDmTo(e.target.value)}
+                    >
+                      <option value="all">All</option>
+                      {userListOptions}
+                    </select>
                   </div>
-                </form>
-              </div>
+                  <div className="col-sm-8 col-xs-4 mr-2">
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={msgInput}
+                      onChange={(e) => setMsgInput(e.target.value)}
+                    />
+                  </div>
+                  <div className="col-sm-1 col-xs-1">
+                    <button
+                      type="button"
+                      className="btn btn-primary btn-block custom-btn"
+                      onClick={sendMsg}
+                    >
+                      send
+                    </button>
+                  </div>
+                  <div className="col-sm-1 col-xs-1">
+                    <button
+                      type="button"
+                      className="btn btn-dark btn-block custom-btn"
+                      onClick={disconnect}
+                    >
+                      exit
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </>
@@ -166,8 +214,6 @@ export default function Chatting2() {
           className="vh-100 login-dark"
           style={{
             backgroundImage: "url(/img/star-sky.jpg",
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
           }}
         >
           <div className="container h-100">
